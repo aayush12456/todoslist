@@ -1,24 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import Header from './MyComponents/Header';
+import {Todos} from "./MyComponents/Todos"
+import React, { useState } from 'react';
+import {Footer} from './MyComponents/Footer';
+import {About} from './MyComponents/About';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 function App() {
+  const onDelete=(todo)=>{
+    console.log("delete component ")
+    setTodos(todos.filter((e)=>{
+      return e!==todo;
+    }))
+  }
+  const [todos, setTodos] = useState([
+    {
+      sno:1,
+      title:"go to the market",
+      desc:"you need to go to market"      
+    },
+    {
+      sno:2,
+      title:"go to the mall",
+      desc:"you need to go to mall"      
+    }
+  ]
+  )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Router>
+       <Header title={"TodosList"} searchBar={true}/>
+       
+       <Switch>
+       <Route exact path="/" render={()=>{
+         return(
+           <>
+           <Todos todos={todos} onDelete={onDelete}/>
+           </>
+         )
+       }}>
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+        </Switch>
+         
+       <Footer/>
+      </Router>
+      </>  
+     
   );
 }
 
