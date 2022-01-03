@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import {Footer} from './MyComponents/Footer';
 import {About} from './MyComponents/About';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
